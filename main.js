@@ -1,5 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+import { 
+  getFirestore, 
+  collection, 
+  addDoc, 
+  onSnapshot, 
+  query, 
+  orderBy 
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCYBpTxF3QmiYjzB9xYiSDwdBk0vOkl-nM",
@@ -92,4 +99,31 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
   document.getElementById("memo").value = "";
   document.getElementById("content").value = "";
   typeInput.value = "";
+});
+
+const listBody = document.getElementById("listBody");
+
+const q = query(collection(db, "consults"), orderBy("createdAt", "desc"));
+
+onSnapshot(q, (snapshot) => {
+  listBody.innerHTML = "";
+
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${data.date || ""}</td>
+      <td>${data.counselor || ""}</td>
+      <td>${data.name || ""}</td>
+      <td>${data.phone || ""}</td>
+      <td>${data.birth || ""}</td>
+      <td>${data.gender || ""}</td>
+      <td>${data.area1 || ""} ${data.area2 || ""} ${data.area3 || ""}</td>
+      <td>${data.type || ""}</td>
+      <td>${data.memo || ""}</td>
+    `;
+
+    listBody.appendChild(tr);
+  });
 });
