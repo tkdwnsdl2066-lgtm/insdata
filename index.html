@@ -2,21 +2,72 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>insmk 상담 DB 테스트</title>
+  <title>INSMK 상담 DB</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, select, textarea, button { margin: 6px 0; padding: 6px; width: 300px; }
+    label { display: block; margin-top: 10px; }
+    .box { border: 1px solid #ccc; padding: 15px; max-width: 400px; }
+  </style>
 </head>
 <body>
-  <h1>insmk 상담 입력 테스트</h1>
+  <h2>📋 INSMK 상담 입력</h2>
 
-  <div>
-    <input id="name" placeholder="고객명" />
+  <div class="box">
+    <label>날짜
+      <input type="date" id="dateInput" />
+    </label>
+
+    <label>상담사
+      <select id="counselor">
+        <option value="">선택</option>
+        <option value="김상담">김상담</option>
+        <option value="이상담">이상담</option>
+        <option value="박상담">박상담</option>
+      </select>
+    </label>
+
+    <label>고객명
+      <input type="text" id="name" placeholder="한글 2~5글자" />
+    </label>
+
+    <label>연락처
+      <input type="text" id="phone" placeholder="010-0000-0000" />
+    </label>
+
+    <label>생년월일
+      <input type="date" id="birth" />
+    </label>
+
+    <label>성별
+      <select id="gender">
+        <option value="">선택</option>
+        <option value="남">남</option>
+        <option value="여">여</option>
+      </select>
+    </label>
+
+    <label>지역1 <input type="text" id="area1" /></label>
+    <label>지역2 <input type="text" id="area2" /></label>
+    <label>지역3 <input type="text" id="area3" /></label>
+
+    <label>메모
+      <textarea id="memo"></textarea>
+    </label>
+
+    <label>상담내용
+      <textarea id="content"></textarea>
+    </label>
+
+    <label>실버 / 일반
+      <input type="text" id="type" readonly />
+    </label>
+
+    <button id="saveBtn">저장</button>
+    <button id="downloadExcel">엑셀 다운로드</button>
+    <input type="file" id="uploadExcel" />
   </div>
-  <div>
-    <input id="phone" placeholder="연락처 010-0000-0000" />
-  </div>
 
-  <button id="saveBtn">저장</button>
-
-  <!-- Firebase + 로직 -->
   <script type="module" src="./main.js"></script>
 </body>
 </html>
